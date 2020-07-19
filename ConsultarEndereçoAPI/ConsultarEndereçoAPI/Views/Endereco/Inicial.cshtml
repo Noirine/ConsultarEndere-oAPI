@@ -1,0 +1,69 @@
+﻿@model List<Endereco>
+
+
+<!--Ariane Noirine Pimentel Silva Assis Neves, Matricula 1621586-->
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title> Consulta e Cadastro de CEP</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+
+<body class="container" style="padding-top:40px">
+
+    <fieldset>
+        <legend>Consulta e Cadastro de CEP</legend></br>
+
+            <nav class="navbar navbar-light bg-light">
+                <form class="form-inline" asp-action="ConsultaCep" asp-controller="Endereco">
+                    <input type="text" class="form-control mr-sm-2" id="cep" name="cep" placeholder="Informe o CEP" aria-label="Search" required="required">
+                    <input type="submit" value="Consultar e Cadastrar" class="btn btn-outline-success my-2 my-sm-0"/>
+                </form>
+            </nav>
+       
+        <br> <br>
+
+        <table class="table table-hover">
+            <thead class="p-3 mb-2 bg-success text-white">
+                <tr>
+                    <th scope="col">Cód.</th>
+                    <th scope="col">CEP</th>
+                    <th scope="col">Logradouro</th>
+                    <th scope="col">Complemento</th>
+                    <th scope="col">Bairro</th>
+                    <th scope="col">Localidade</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">
+                        <svg width="8em" height="1em" viewBox="0 0 16 16" class="bi bi-house-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M8 3.293l6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z" />
+                            <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z" />
+                        </svg>
+                    </th>
+                </tr>
+            </thead>
+            @foreach (Endereco u in Model)
+            {
+                <tr>
+                    <td>@u.enderecoId</td>
+                    <td>@u.cep</td>
+                    <td>@u.logradouro</td>
+                    <td>@u.complemento</td>
+                    <td>@u.bairro</td>
+                    <td>@u.localidade</td>
+                    <td>@u.uf</td>
+
+                    <td>
+                        <a class="font-italic" asp-action="Alterar" asp-controller="Endereco" asp-route-id="@u.enderecoId">Alterar / </a>
+                        <a class="font-italic" asp-action="Remover" asp-controller="Endereco" asp-route-id="@u.enderecoId">Remover</a>
+
+                    </td>
+                </tr>
+            }
+        </table>
+
+    </fieldset>
+</body>
+</html>
